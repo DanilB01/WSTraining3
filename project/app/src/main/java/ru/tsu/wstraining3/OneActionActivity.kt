@@ -22,6 +22,7 @@ open class OneActionActivity: AppCompatActivity() {
             val intent = Intent(this, MenuActivity::class.java)
             intent.putExtra("isFirstGame", false)
             startActivity(intent)
+            overridePendingTransition(R.anim.zoom_anim, R.anim.static_animation)
             finish()
         }
     }

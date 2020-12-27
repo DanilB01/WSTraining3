@@ -6,21 +6,21 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_menu.*
 
 class MenuActivity: AppCompatActivity() {
+    private var sharedPreference : SharedPreference? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-        val sharedPreference = SharedPreference(this)
-        sharedPreference.clearSharedPreference()
-
         val jsonHelper = JsonUtils(this)
         val isFirstGame = intent.getBooleanExtra("isFirstGame", true)
+        sharedPreference = SharedPreference(this)
 
         if(isFirstGame) {
             mainText.text = getText(R.string.myVisualNovel)
             actionButton.text = getText(R.string.start)
 
             if(!jsonHelper.ifScenesAlreadyExist()) {
+                sharedPreference?.clearSharedPreference()
                 jsonHelper.saveScenes()
             }
 
@@ -31,6 +31,7 @@ class MenuActivity: AppCompatActivity() {
 
         actionButton.setOnClickListener {
             startActivity(Intent(this, EditNameActivity::class.java))
+            overridePendingTransition(R.anim.zoom_anim, R.anim.static_animation)
             finish()
         }
     }

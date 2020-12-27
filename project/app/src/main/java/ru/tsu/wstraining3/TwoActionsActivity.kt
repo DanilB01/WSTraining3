@@ -74,6 +74,7 @@ open class TwoActionsActivity: AppCompatActivity() {
         val intent = Intent(this, OneActionActivity::class.java)
         intent.putExtra("currentScreen", value)
         startActivity(intent)
+        overridePendingTransition(R.anim.zoom_anim, R.anim.static_animation)
         finish()
     }
 

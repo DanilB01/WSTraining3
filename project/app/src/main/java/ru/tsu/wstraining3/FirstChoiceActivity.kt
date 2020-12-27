@@ -31,6 +31,7 @@ class FirstChoiceActivity: AppCompatActivity() {
         val intent = Intent(this, TwoActionsActivity::class.java)
         intent.putExtra("currentScreen", value)
         startActivity(intent)
+        overridePendingTransition(R.anim.zoom_anim, R.anim.static_animation)
         finish()
     }
 }

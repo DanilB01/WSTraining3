@@ -20,6 +20,7 @@ class EditNameActivity: AppCompatActivity() {
             } else {
                 intent.putExtra("name", inputName)
                 startActivity(intent)
+                overridePendingTransition(R.anim.zoom_anim, R.anim.static_animation)
                 finish()
             }
         }

@@ -3,12 +3,18 @@ package ru.tsu.wstraining3
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_two_options.*
 
 open class TwoActionsActivity: AppCompatActivity() {
+    private var jsonHelper : JsonUtils? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_two_options)
+
+        jsonHelper = JsonUtils(this)
+        val curScene = intent.getStringExtra("currentScreen")
 
         fun setDefaultButtons() {
             optionOneButton.setOnClickListener {
@@ -48,31 +54,12 @@ open class TwoActionsActivity: AppCompatActivity() {
             }
         }
 
-        when(intent.getStringExtra("currentScreen")) {
-            "field" -> {
-                setFieldContent()
-                setDefaultButtons()
-            }
-            "camping" -> {
-                setCampingContent()
-                setDefaultButtons()
-            }
-            "running" -> {
-                setRunningContent()
-                setDefaultButtons()
-            }
-            "preparingHalloween" -> {
-                setPreparingHalloweenContent()
-                setPrepareHalloweenButtons()
-            }
-            "film" -> {
-                setFilmContent()
-                setFilmButtons()
-            }
-            "costumes" -> {
-                setCostumesContent()
-                setCostumesButtons()
-            }
+        setScene(curScene!!)
+        when(curScene) {
+            "preparingHalloween" -> setPrepareHalloweenButtons()
+            "film" -> setFilmButtons()
+            "costumes" -> setCostumesButtons()
+            else -> setDefaultButtons()
         }
     }
 
@@ -90,45 +77,14 @@ open class TwoActionsActivity: AppCompatActivity() {
         finish()
     }
 
-    private fun setFieldContent() {
-        backImage.setImageDrawable(getDrawable(R.drawable.fields_back))
-        speechText.text = getString(R.string.speechField)
-        optionOneButton.text = getString(R.string.optionOneField)
-        optionTwoButton.text = getString(R.string.optionTwoField)
-    }
+    private fun setScene(scene: String) {
+        val jsonScene = jsonHelper?.getScene(scene)
+        val curScene = Gson().fromJson(jsonScene, TwoActionsData::class.java)
+        val picID = resources.getIdentifier(curScene.picture, "drawable", packageName)
 
-    private fun setCampingContent() {
-        backImage.setImageDrawable(getDrawable(R.drawable.camping_back))
-        speechText.text = getString(R.string.speechCamping)
-        optionOneButton.text = getString(R.string.optionOneCamping)
-        optionTwoButton.text = getString(R.string.optionTwoCamping)
-    }
-
-    private fun setRunningContent() {
-        backImage.setImageDrawable(getDrawable(R.drawable.running_back))
-        speechText.text = getString(R.string.speechRunning)
-        optionOneButton.text = getString(R.string.optionOneRunning)
-        optionTwoButton.text = getString(R.string.optionTwoRunning)
-    }
-
-    private fun setFilmContent() {
-        backImage.setImageDrawable(getDrawable(R.drawable.film_back))
-        speechText.text = getString(R.string.speechFilm)
-        optionOneButton.text = getString(R.string.optionOneFilm)
-        optionTwoButton.text = getString(R.string.optionTwoFilm)
-    }
-
-    private fun setPreparingHalloweenContent() {
-        backImage.setImageDrawable(getDrawable(R.drawable.halloween_preparing_back))
-        speechText.text = getString(R.string.speechPreparingHalloween)
-        optionOneButton.text = getString(R.string.optionOnePreparingHalloween)
-        optionTwoButton.text = getString(R.string.optionTwoPreparingHalloween)
-    }
-
-    private fun setCostumesContent() {
-        backImage.setImageDrawable(getDrawable(R.drawable.halloween_costumes_back))
-        speechText.text = getString(R.string.speechCostumes)
-        optionOneButton.text = getString(R.string.optionOneCostumes)
-        optionTwoButton.text = getString(R.string.optionTwoCostumes)
+        backImage.setImageDrawable(resources.getDrawable(picID))
+        speechText.text = curScene.speech
+        optionOneButton.text = curScene.optionOne
+        optionTwoButton.text = curScene.optionTwo
     }
 }

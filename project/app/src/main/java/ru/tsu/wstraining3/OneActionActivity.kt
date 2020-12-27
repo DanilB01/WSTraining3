@@ -3,20 +3,20 @@ package ru.tsu.wstraining3
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_one_option.*
 
 open class OneActionActivity: AppCompatActivity() {
+    private var jsonHelper : JsonUtils? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_one_option)
 
-        when(intent.getStringExtra("currentScreen")) {
-            "filmPositive" -> setFilmPositiveContent()
-            "filmNegative" -> setFilmNegativeContent()
-            "costumesPositive" -> setCostumesPositiveContent()
-            "costumesNegative" -> setCostumesNegativeContent()
-        }
-        setAnswer()
+        jsonHelper = JsonUtils(this)
+        val curScene = intent.getStringExtra("currentScreen")
+
+        setScene(curScene!!)
 
         optionButton.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
@@ -26,27 +26,13 @@ open class OneActionActivity: AppCompatActivity() {
         }
     }
 
-    private fun setAnswer() {
-        optionButton.text = getString(R.string.answerLast)
-    }
+    private fun setScene(scene: String) {
+        val jsonScene = jsonHelper?.getScene(scene)
+        val curScene = Gson().fromJson(jsonScene, OneActionData::class.java)
+        val picID = resources.getIdentifier(curScene.picture, "drawable", packageName)
 
-    private fun setFilmPositiveContent() {
-        backImage.setImageDrawable(getDrawable(R.drawable.film_back))
-        speechText.text = getString(R.string.speechFilmPositive)
-    }
-
-    private fun setFilmNegativeContent() {
-        backImage.setImageDrawable(getDrawable(R.drawable.film_back))
-        speechText.text = getString(R.string.speechFilmNegative)
-    }
-
-    private fun setCostumesPositiveContent() {
-        backImage.setImageDrawable(getDrawable(R.drawable.halloween_costumes_back))
-        speechText.text = getString(R.string.speechCostumesPositive)
-    }
-
-    private fun setCostumesNegativeContent() {
-        backImage.setImageDrawable(getDrawable(R.drawable.halloween_costumes_back))
-        speechText.text = getString(R.string.speechCostumesNegative)
+        backImage.setImageDrawable(resources.getDrawable(picID))
+        speechText.text = curScene.speech
+        optionButton.text = curScene.option
     }
 }

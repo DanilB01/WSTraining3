@@ -1,3 +1,55 @@
 <resources>
     <string name="app_name">wstraining3</string>
+
+    <string name="myVisualNovel">Моя визуальная новелла</string>
+    <string name="start">Начать</string>
+
+    <string name="thanksForPlaying">Спасибо, что поиграли!</string>
+    <string name="tryAgain">Пройти еще раз</string>
+
+    <string name="emptyNameError">Стойте! Вы не представились!</string>
+    <string name="typeYourName">Введите свое имя…</string>
+    <string name="kirushaIntroduction">Привет! Меня зовут Кирюша. А тебя?</string>
+    <string name="accept">Подтвердить</string>
+
+    <string name="great">Отлично</string>
+    <string name="whatWillDo">Чем займемся?</string>
+    <string name="goRunning">Пойдем на пробежку</string>
+    <string name="goFieldWalking">Пойдем по полю</string>
+    <string name="goCamping">Пойдем в поход</string>
+
+    <string name="speechRunning">Может, пойдем домой?…</string>
+    <string name="optionOneRunning">Да, и посмотрим фильм</string>
+    <string name="optionTwoRunning">Да, и отпразднуем Хэллоуин</string>
+
+    <string name="speechCamping">Как уютно… Но уже темнеет</string>
+    <string name="optionOneCamping">Пойдем домой и посмотрим фильм</string>
+    <string name="optionTwoCamping">Пойдем домой и отпразднуем Хэллоуин</string>
+
+    <string name="speechField">Тебе грустно… Пойдем домой?</string>
+    <string name="optionOneField">Может, посмотрим фильм?</string>
+    <string name="optionTwoField">Да, отпразднуем Хэллоуин</string>
+
+    <string name="speechFilm">Как тебе фильм?</string>
+    <string name="optionOneFilm">Мне понравился!</string>
+    <string name="optionTwoFilm">Не очень…</string>
+
+    <string name="speechPreparingHalloween">Получается очень красиво!</string>
+    <string name="optionOnePreparingHalloween">Да! Может, посмотрим фильм?</string>
+    <string name="optionTwoPreparingHalloween">Да! Давай сделаем костюмы!</string>
+
+    <string name="speechCostumes">Мне нравится твой костюм.</string>
+    <string name="optionOneCostumes">Твой тоже очень красивый!</string>
+    <string name="optionTwoCostumes">А мне, если честно, не нравится твой…</string>
+
+    <string name="speechFilmPositive">Отлично! А теперь пора спать…</string>
+    <string name="speechFilmNegative">Жаль… Тогда пойдем спать?</string>
+
+    <string name="speechCostumesPositive">Спасибо! Ну, пойдем спать?</string>
+    <string name="speechCostumesNegative">Ничего, я не в обиде. Пойдем спать?</string>
+
+    <string name="answerLast">Да, уже поздно…</string>
+
+
+
 </resources>

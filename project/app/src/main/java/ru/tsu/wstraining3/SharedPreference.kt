@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 
 class SharedPreference(val context: Context) {
-    private val PREFS_NAME = "MyNovel"
-    val sharedPref: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    private val PREFS_NAME = AppConstants.sharedPrefName
+    private val sharedPref: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
     fun saveString(KEY_NAME: String, value: String) {
         sharedPref

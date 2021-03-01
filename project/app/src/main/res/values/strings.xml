@@ -50,6 +50,6 @@
 
     <string name="answerLast">Да, уже поздно…</string>
 
-
+    <string name="isFirstGame">isFirstGame</string>
 
 </resources>

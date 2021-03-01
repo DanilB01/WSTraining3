@@ -14,13 +14,13 @@ open class OneActionActivity: AppCompatActivity() {
         setContentView(R.layout.activity_one_option)
 
         jsonHelper = JsonUtils(this)
-        val curScene = intent.getStringExtra("currentScreen")
+        val curScene = intent.getStringExtra(AppConstants.currentScreenString)
 
         setScene(curScene!!)
 
         optionButton.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
-            intent.putExtra("isFirstGame", false)
+            intent.putExtra(AppConstants.isFirstGameString, false)
             startActivity(intent)
             overridePendingTransition(R.anim.zoom_anim, R.anim.static_animation)
             finish()
@@ -30,10 +30,10 @@ open class OneActionActivity: AppCompatActivity() {
     private fun setScene(scene: String) {
         val jsonScene = jsonHelper?.getScene(scene)
         val curScene = Gson().fromJson(jsonScene, OneActionData::class.java)
-        val picID = resources.getIdentifier(curScene.picture, "drawable", packageName)
+        val picID = resources.getIdentifier(curScene.picture, AppConstants.drawableDefType, packageName)
 
         backImage.setImageDrawable(resources.getDrawable(picID))
         speechText.text = curScene.speech
-        optionButton.text = curScene.option
+        optionButton.text = curScene.optionOne
     }
 }

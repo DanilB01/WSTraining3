@@ -10,26 +10,26 @@ class FirstChoiceActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first_choice)
 
-        val name = intent.getStringExtra("name")
+        val name = intent.getStringExtra(AppConstants.nameString)
         val speech = "${getText(R.string.great)}, $name! ${getText(R.string.whatWillDo)}"
         speechText.text = speech
 
         goFieldWalkingButton.setOnClickListener {
-            changeScreen("field")
+            changeScreen(AppConstants.fieldString)
         }
 
         goCampingButton.setOnClickListener {
-            changeScreen("camping")
+            changeScreen(AppConstants.campingString)
         }
 
         goRunningButton.setOnClickListener {
-            changeScreen("running")
+            changeScreen(AppConstants.runningString)
         }
     }
 
     private fun changeScreen(value: String) {
         val intent = Intent(this, TwoActionsActivity::class.java)
-        intent.putExtra("currentScreen", value)
+        intent.putExtra(AppConstants.currentScreenString, value)
         startActivity(intent)
         overridePendingTransition(R.anim.zoom_anim, R.anim.static_animation)
         finish()

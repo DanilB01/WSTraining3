@@ -18,7 +18,7 @@ class EditNameActivity: AppCompatActivity() {
             if(inputName.isEmpty()) {
                 Toast.makeText(this, R.string.emptyNameError, Toast.LENGTH_SHORT).show()
             } else {
-                intent.putExtra("name", inputName)
+                intent.putExtra(AppConstants.nameString, inputName)
                 startActivity(intent)
                 overridePendingTransition(R.anim.zoom_anim, R.anim.static_animation)
                 finish()

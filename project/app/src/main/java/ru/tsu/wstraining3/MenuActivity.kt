@@ -12,7 +12,7 @@ class MenuActivity: AppCompatActivity() {
         setContentView(R.layout.activity_menu)
 
         val jsonHelper = JsonUtils(this)
-        val isFirstGame = intent.getBooleanExtra("isFirstGame", true)
+        val isFirstGame = intent.getBooleanExtra(AppConstants.isFirstGameString, true)
         sharedPreference = SharedPreference(this)
 
         if(isFirstGame) {
